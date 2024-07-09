@@ -3,7 +3,6 @@ package baekjoon;
 import java.util.*;
 
 public class Main_9370 {
-    public static final int INF = (int) 1e9;
     public static int T, n, m, t, s, g, h;
     public static ArrayList<ArrayList<Edge>> graph;
     public static int[] d;
@@ -50,7 +49,7 @@ public class Main_9370 {
     }
     public static int dijkstra(int start, int end) {
         d = new int[n + 1];
-        Arrays.fill(d, INF);
+        Arrays.fill(d, Integer.MAX_VALUE);
         PriorityQueue<Edge> pq = new PriorityQueue<>();
         pq.add(new Edge(start, 0));
         d[start] = 0;
