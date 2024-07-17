@@ -36,8 +36,6 @@ public class Solution_2931_MW {
     static char[] blocks = {'|', '-', '+', '1', '2', '3', '4'};
     static int[] dy = {-1, 0, 1, 0};
     static int[] dx = {0, -1, 0, 1};
-    static List<Pair> plusList = new ArrayList<>();
-    static boolean[][][] plusValid;
     public static void main(String[] args) throws Exception {
 
         // 임의의 빈칸을 선택.
@@ -59,8 +57,6 @@ public class Solution_2931_MW {
                     M = new Pair(i, j);
                 } else if(board[i][j] == 'Z') {
                     Z = new Pair(i, j);
-                } else if(board[i][j] == '+') {
-                    plusList.add(new Pair(i, j));
                 }
             }
         }
@@ -87,7 +83,7 @@ public class Solution_2931_MW {
                         }
                     }
 
-                    plusValid = new boolean[r][c][2];
+//                    plusValid = new boolean[r][c][2];
                     if(bfs()) {
                         System.out.println((i+1) + " " + (j+1) + " " + board[i][j]);
                         return;
@@ -122,11 +118,6 @@ public class Solution_2931_MW {
 //            System.out.println(cur.y + " " + cur.x);
             if(ny < 0 || ny >= r || nx < 0 || nx >= c)  continue;
             if(board[ny][nx] == 'Z') {
-                for(Pair p : plusList) {
-                    if(!plusValid[p.y][p.x][0] || !plusValid[p.y][p.x][1]) {
-                        return false;
-                    }
-                }
                 return true;
             }
             if(board[ny][nx] == '.')    continue;
@@ -156,16 +147,12 @@ public class Solution_2931_MW {
         } else if(board[y][x] == '+') {
             if(dir == 0) {
                 block = new Block(y, x, 0, 0);
-                plusValid[y][x][0] = true;
             } else if(dir == 1) {
                 block = new Block(y, x, 1, 1);
-                plusValid[y][x][1] = true;
             } else if (dir == 2) {
                 block = new Block(y, x, 2, 2);
-                plusValid[y][x][0] = true;
             } else if (dir == 3) {
                 block = new Block(y, x, 3, 3);
-                plusValid[y][x][1] = true;
             }
         } else if(board[y][x] == '1') {
             if(dir == 0) {
