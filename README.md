@@ -36,7 +36,6 @@
 해결할 문제 목록과 진행 상황은 [문제 목록](problems/README.md) 파일에서 확인할 수 있습니다.
 
 ## 스터디 규칙
-- **정기 회의**: 매주 일정한 시간에 온라인 혹은 오프라인으로 모여 진행 상황을 공유하고 토론합니다.
 - **문제 할당**: 매주 풀어야 할 문제를 정하고, 각자 할당된 문제를 해결합니다.
 - **기한 준수**: 정해진 기한 내에 문제를 풀고, PR을 생성합니다.
 - **협력**: 서로의 질문에 성실히 답변하고, 도움이 필요한 부분에 대해 적극적으로 지원합니다.
@@ -53,5 +52,7 @@
 | 김세진 | [hsusj996](https://github.com/hsusj996) |
 | 김민욱 | [k-kmw](https://github.com/k-kmw) |
 | 박지훈 | [hyuntohoon](https://github.com/hyuntohoon)|  
+| 박연후 | [Rei-L0](https://github.com/Rei-L0)|  
+| 오동규 | [Eastplanet](https://github.com/Eastplanet)|  
 
 함께 성장하는 스터디가 되길 바랍니다. 화이팅!
