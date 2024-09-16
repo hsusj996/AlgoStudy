@@ -32,8 +32,6 @@ public class Solution_3108_MW {
     public static void main(String[] args) throws IOException {
 
         // 1. 직사각형을 2개씩 뽑아서 서로 교점이 있으면 union
-        // 교점이 있는지 확인: (x1, y1), (x2, y2), (x, y) => x1 <= x <= x2 && y1 <= y <= y2이면 교점 존재
-        // 한 직사각형에서 다른 모든 직사각형의 모든 꼭짓점 (x, y)에 대해 수행
         // 2. 모두 확인한 후, 유일한 부모의 개수 세기
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -53,7 +51,8 @@ public class Solution_3108_MW {
         make_set();
 
         for(int i=0; i<n; i++) {
-            for(int j=i+1; j<n; j++) {
+            for(int j=0; j<n; j++) {
+                if(i == j)  continue;
                 if(check(i, j)) {
                     union(i+1, j+1);
                 }
@@ -62,23 +61,31 @@ public class Solution_3108_MW {
 
         for(int i=1; i<=n; i++) {
             int root = find(i);
-//            System.out.println(i + " " + root);
             vis[root] = true;
         }
 
         int cnt = 0;
         for(int i=1; i<=n; i++) {
             if(vis[i])  {
-//                System.out.println(i);
                 cnt++;
             }
         }
-        for(int i=0; i<n; i++) {
-            if(rects[i].x1 == 0 && rects[i].y1 == 0)    cnt--;
+
+        if(cnt > 0) {
+            for(int i=0; i<n; i++) {
+                if(((rects[i].x1 <= 0 && rects[i].x2 >= 0 && (rects[i].y1 == 0 || rects[i].y2 == 0)) || (rects[i].y1 <= 0 && rects[i].y2 >= 0) && (rects[i].x1 == 0 || rects[i].x2 == 0))) {
+                    cnt--;
+                    break;
+                }
+            }
         }
         System.out.println(cnt);
     }
 
+    /*
+    교점이 생긴다면 true
+    교점이 생기지 않는다면 false
+     */
     public static boolean check(int a, int b) {
         Rect rect = rects[a];
         Rect cmp = rects[b];
@@ -89,7 +96,7 @@ public class Solution_3108_MW {
         point[3] = new Point(cmp.x1, cmp.y2); // 왼쪽 아래점
 
         // 사각형이 위쪽
-        if(point[2].y > rect.y1)    return false;
+        if(point[3].y < rect.y1)    return false;
 
         // 사각형이 왼쪽
         if(point[1].x < rect.x1)    return false;
@@ -101,8 +108,10 @@ public class Solution_3108_MW {
         if(point[0].y > rect.y2)    return false;
 
         // 사각형이 안쪽
-        if(point[0].y < rect.y1 && point[0].x > rect.x1 && point[2].y < rect.y2 && point[2].x < rect.x2)    return false;
+        if(point[0].y > rect.y1 && point[0].x > rect.x1 && point[2].y < rect.y2 && point[2].x < rect.x2)    return false;
 
+        // 사각형이 바깥쪽
+        if(point[0].y < rect.y1 && point[0].x < rect.x1 && point[2].y > rect.y2 && point[2].x > rect.x2)    return false;
 
         return true;
     }
